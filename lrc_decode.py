@@ -42,6 +42,8 @@ class LRCDecode:
     def _Decode(self, action):
         line = action.line.strip()
         rst = self.pattern.match(line)
+        if rst == None:
+            return
 
         minutes = int(rst.group(1))
         seconds = int(rst.group(2))
