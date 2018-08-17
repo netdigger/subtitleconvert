@@ -6,6 +6,8 @@ from line_action import LineAction
 from end_action import EndAction
 
 class OutputElement:
+    def __init__(self, path):
+        self.path = path
 
     def Execute(self, action):
         if isinstance(action, StartAction):
@@ -16,7 +18,7 @@ class OutputElement:
             self._CloseFile(action)
 
     def _OpenFile(self, action):
-        self.f = open(action.path + action.name, "w")
+        self.f = open(self.path + action.name, "w")
         
     def _CloseFile(self, action):
         self.f.close()
