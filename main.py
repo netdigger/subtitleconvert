@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import sys
 from input_element import InputElement
 from lrc_decode import LRCDecode 
 from srt_encode import SRTEncode 
@@ -9,9 +10,20 @@ from system_parameters import SystemParameters
 
 def main():
     params = SystemParameters()
-    in_node = InputElement(params.source_dir, "lrc")
-    decode_node = LRCDecode()
-    encode_node = SRTEncode()
+    if params.input_type == "lrc":
+        in_node = InputElement(params.input_dir, "lrc")
+        decode_node = LRCDecode()
+    else:
+        print("current not support decode " + params.input_type + " format")
+        sys.exit(1)
+
+    if params.output_type == "srt":
+        encode_node = SRTEncode()
+    else:
+        print("current not support encode " + params.output_type + " format")
+        sys.exit(1)
+
+
     out_node = OutputElement(params.output_dir)
 
     in_node.SetNextElement(decode_node)
