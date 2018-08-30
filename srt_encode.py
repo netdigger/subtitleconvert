@@ -25,8 +25,6 @@ class SRTEncode:
         self.out.Execute(action)
 
     def _Encode(self, action):
-        print("SRTEncode:" + str(action.start))
-
         line = str(self.index) + "\n" \
                 + self._GetTime(action.start) + " --> " \
                 + self._GetTime(action.end) + "\n" \
