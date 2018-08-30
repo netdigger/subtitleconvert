@@ -27,9 +27,10 @@ class InputElement:
                     self._Read(dirpath, name)
 
     def _Read(self, dirpath, name):
+        if not dirpath.endswith("/"): dirpath += "/"
         print("Convert " + dirpath + name + " ...")
-        with open(dirpath + "/" + name) as handle:
-            start = StartAction(dirpath, name)
+        with open(dirpath + name) as handle:
+            start = StartAction(dirpath.split(self.dir)[1], name)
             self.out.Execute(start)
             for line in handle:
                 self.out.Execute(LineAction(line))
