@@ -5,6 +5,7 @@ from content_action import ContentAction
 from line_action import LineAction
 from end_action import EndAction
 
+
 class SRTEncode:
 
     def SetNextElement(self, out):
@@ -19,18 +20,17 @@ class SRTEncode:
             self.out.Execute(action)
 
     def _SetName(self, action):
-        action.name = action.name + ".srt" 
-        self.index = 1;
+        action.name = action.name + ".srt"
+        self.index = 1
         self.out.Execute(action)
-
 
     def _Encode(self, action):
         print("SRTEncode:" + str(action.start))
-        
+
         line = str(self.index) + "\n" \
                 + self._GetTime(action.start) + " --> " \
                 + self._GetTime(action.end) + "\n" \
-                + action.content + "\n"
+                + action.content + "\n\n"
         self.out.Execute(LineAction(line))
         self.index = self.index + 1
 
@@ -40,7 +40,5 @@ class SRTEncode:
         second = format(time % 60, "02d")
         time = time / 60
         minute = format(time % 60, "02d")
-        hour = format(time / 60, "02d") 
-        return hour + ":" + minute + ":" + second + "," + micro 
-
-        
+        hour = format(time / 60, "02d")
+        return hour + ":" + minute + ":" + second + "," + micro
